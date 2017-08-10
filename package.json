@@ -1,0 +1,28 @@
+{
+  "name": "cmb_cmdb",
+  "version": "1.0.0",
+  "description": "cmdb for cmb",
+  "main": "index.js",
+  "author": "Darsy Cheuk",
+  "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/nodemon/bin/nodemon.js ./bin/www.js"
+  },
+  "dependencies": {
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-compose": "^4.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-cors": "^0.0.16",
+    "koa-logger": "^3.0.0",
+    "koa-router": "^7.2.1",
+    "log4js": "^1.1.1",
+    "mongoose": "^4.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.5.0",
+    "nodemon": "^1.11.0"
+  }
+}
