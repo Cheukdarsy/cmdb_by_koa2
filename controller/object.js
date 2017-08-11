@@ -18,7 +18,14 @@ const DEFAULTATTRIBUTE = {
 };
 
 class ObjectModel {
-  // 创建新的资源模型
+  /**
+   * 创建新的资源模型
+   *
+   * @static
+   * @param {any} ctx
+   * @returns
+   * @memberof ObjectModel
+   */
   static async createObject(ctx) {
     const { ResourceID } = ctx.request.body;
     console.log(ctx.request.body);
@@ -31,7 +38,7 @@ class ObjectModel {
       // 在资源模型表增加一条记录
       const doc = await ResourceObjectModel
         .create(ctx.request.body);
-      const defaultAttr = await ObjectAttributeModel.create(Object.assign(DEFAULTATTRIBUTE, { ResourceID }));
+      await ObjectAttributeModel.create(Object.assign(DEFAULTATTRIBUTE, { ResourceID }));
       // 通过关联资源模型表，页面展示的卡表增加一条记录
       const result = await CardsModel
         .create({ ResourceID: doc.ResourceID, name: doc.ResourceName, Category: doc.Category });
@@ -41,7 +48,13 @@ class ObjectModel {
     }
   }
 
-  // 获取具体某个资源模型
+  /**
+   * 获取具体某个资源模型
+   *
+   * @static
+   * @param {any} ctx
+   * @memberof ObjectModel
+   */
   static async getObjectDetail(ctx) {
     const { ResourceID } = ctx.params;
     const objectDetail = await ResourceObjectModel
@@ -62,12 +75,19 @@ class ObjectModel {
     ctx.body = updatedResource;
   }
 
-  // 删除资源模型
+  /**
+   * 删除资源模型
+   *
+   * @static
+   * @param {any} ctx
+   * @memberof ObjectModel
+   */
   static async deleteObject(ctx) {
     const { ResourceID } = ctx.request.body;
     try {
       const resourceModelName = `${ResourceID}Resource`;
       const collectionNames = [];
+      // 获取数据库collection的名称，用于判断模型是否有实例化
       const collectionSet = await mongoose.connection.db.listCollections().toArray();
       collectionSet.forEach((collection) => {
         collectionNames.push(collection.name);

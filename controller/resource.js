@@ -47,6 +47,7 @@ class Resource {
     collectionSet.forEach((collection) => {
       collectionNames.push(collection.name);
     });
+    console.log(collectionNames);
     if (!resourceModelExit || !collectionNames.includes(`${ResourceID}resources`)) {
       ctx.body = '资源模型不存在！';
       return;
@@ -58,8 +59,7 @@ class Resource {
       const docs = await resourceModel.create(resourceInstance);
       ctx.body = docs;
     } catch (error) {
-      ctx.body.errors = true;
-      ctx.body.message = error;
+      ctx.body = error;
     }
   }
   /**
