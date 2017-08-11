@@ -28,7 +28,7 @@ const responseFormatter = (ctx) => {
 };
 
 const urlFilter = pattern => async function (ctx, next) {
-  const reg = new RegExp(pattern);
+  const reg = new RegExp(pattern);·
   try {
     await next();
   } catch (error) {

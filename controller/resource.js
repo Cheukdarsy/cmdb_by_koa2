@@ -42,7 +42,12 @@ class Resource {
     console.log(mongoose.modelNames());
     const resourceModelName = `${ResourceID}Resource`;
     const resourceModelExit = mongoose.modelNames().includes(resourceModelName);
-    if (!resourceModelExit) {
+    const collectionNames = [];
+    const collectionSet = await mongoose.connection.db.listCollections().toArray();
+    collectionSet.forEach((collection) => {
+      collectionNames.push(collection.name);
+    });
+    if (!resourceModelExit || !collectionNames.includes(`${ResourceID}resources`)) {
       ctx.body = '资源模型不存在！';
       return;
     }

@@ -67,12 +67,16 @@ class ObjectModel {
     const { ResourceID } = ctx.request.body;
     try {
       const resourceModelName = `${ResourceID}Resource`;
-      const resourceModelExit = mongoose.modelNames().includes(resourceModelName);
-      console.log(mongoose.modelNames());
-      if (resourceModelExit) {
+      const collectionNames = [];
+      const collectionSet = await mongoose.connection.db.listCollections().toArray();
+      collectionSet.forEach((collection) => {
+        collectionNames.push(collection.name);
+      });
+      if (collectionNames.includes(`${ResourceID}resources`)) {
         await mongoose.connection.collection(`${ResourceID}resources`).drop((err) => {
           if (err) console.log(err);
           mongoose.modelNames().splice(mongoose.modelNames().indexOf(resourceModelName), 1);
+          console.log(mongoose.modelNames());
         });
       }
       const removeResourceResult = await ResourceObjectModel
