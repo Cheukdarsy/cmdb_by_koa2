@@ -6,7 +6,7 @@ const ApiError = require('../utils/ApiError');
 
 const responseFormatter = (ctx) => {
   if (ctx.body) {
-    if (ctx.body.errors || String(ctx.body.name).indexOf('Error') !== -1) {
+    if (ctx.body.errors || ctx.body.name) {
       ctx.body = {
         code: -1,
         msg: ctx.body.name || 'error',
@@ -28,7 +28,7 @@ const responseFormatter = (ctx) => {
 };
 
 const urlFilter = pattern => async function (ctx, next) {
-  const reg = new RegExp(pattern);
+  const reg = new RegExp(pattern);·
   try {
     await next();
   } catch (error) {
