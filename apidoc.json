@@ -1,0 +1,11 @@
+{
+  "name": "cmb的cmdb接口文档",
+  "version": "0.0.1",
+  "description": "api文档",
+  "title": "api for cmdb",
+  "url": "",
+  "sampleUrl": "",
+  "template": {
+    "forcelanguage": "zh-cn"
+  }
+}
