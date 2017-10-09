@@ -16,7 +16,8 @@ const ObjectAttr = new Schema({
   AttrClassify: String,
   AttrRequired: Boolean,
   AttrReadOnly: Boolean,
-  AttrUnique: Boolean
+  AttrUnique: Boolean,
+  display: { type: Boolean, default: true }
 });
 
 

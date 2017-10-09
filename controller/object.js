@@ -95,6 +95,7 @@ class ObjectModel {
       if (collectionNames.includes(`${ResourceID}resources`)) {
         await mongoose.connection.collection(`${ResourceID}resources`).drop((err) => {
           if (err) console.log(err);
+          mongoose.modelNames().splice(mongoose.modelNames().indexOf(resourceModelName), 1);
           Reflect.deleteProperty(mongoose.connection.models, resourceModelName);
         });
       }

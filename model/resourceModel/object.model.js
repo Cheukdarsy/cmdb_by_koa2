@@ -11,7 +11,8 @@ const ResourceObject = new Schema({
   ResourceName: { type: String, required: true },
   Category: { type: String, enum: ['业务资源模型', '基础资源模型', '组织信息模型'] },
   Memo: String,
-  Detail: [{ type: Schema.Types.ObjectId, ref: 'ObjectAttr' }]
+  Detail: [{ type: Schema.Types.ObjectId, ref: 'ObjectAttr' }],
+  resourceDisplayList: { type: Array, default: [] }
 });
 
 module.exports = mongoose.model('ResourceObject', ResourceObject);

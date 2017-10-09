@@ -1,6 +1,11 @@
-/**
- * 属性的逻辑操作 ／增删改 接口
+/*
+ * @Author: darsy.cheuk
+ * @Date: 2017-08-22 10:33:19
+ * @Last Modified by: darsy.cheuk
+ * @Last Modified time: 2017-09-21 10:40:19
+ * @Content: 属性的逻辑操作 ／增删改 接口
  */
+
 
 const mongoose = require('mongoose');
 
@@ -43,6 +48,52 @@ class Attribute {
     ctx.body = detailAttrs;
   }
 
+  static async displayAwailableAttrList(ctx) {
+    const { ResourceID } = ctx.query;
+    try {
+      const objectModel = await ResourceObjectModel.findOne({ ResourceID }).select('resourceDisplayList').exec();
+      const displayList = JSON.parse(objectModel.resourceDisplayList);
+      ctx.body = displayList;
+    } catch (error) {
+      ctx.body = error;
+    }
+  }
+
+  static async displayAllAttrList(ctx) {
+    const { ResourceID } = ctx.query;
+    const list = [];
+    try {
+      const attrs = await ObjectAttributeModel.find({ ResourceID }).select('AttrId AttrName').exec();
+      const objectModel = await ResourceObjectModel.findOne({ ResourceID }).select('resourceDisplayList').exec();
+      const displayList = JSON.parse(objectModel.resourceDisplayList);
+      displayList.forEach((object) => {
+        if (object.AttrId) list.push(object.AttrId);
+      });
+      attrs.forEach((object) => {
+        const tempObject = object;
+        if (!list.includes(object.AttrId)) {
+          tempObject.display = false;
+        } else {
+          tempObject.display = true;
+        }
+      });
+      ctx.body = attrs;
+    } catch (error) {
+      ctx.body = error;
+    }
+  }
+  // TODO: update relative resourceModel
+  static async deleteObjectAttr(ctx) {
+    const { AttrId, ResourceID } = ctx.request.body;
+    try {
+      const removeAttrResult = await ObjectAttributeModel
+        .findOneAndRemove({ AttrId, ResourceID }).exec();
+      if (removeAttrResult) ctx.body = `删除${AttrId}成功!`;
+    } catch (error) {
+      ctx.body = error;
+    }
+  }
+
   static async displayObjectAttr(ctx) {
     const { ResourceID } = ctx.params;
     try {
@@ -53,12 +104,12 @@ class Attribute {
     }
   }
 
-  static async deleteObjectAttr(ctx) {
-    const { AttrId, ResourceID } = ctx.request.body;
+  static async updateDisplayList(ctx) {
+    const { ResourceID, resourceDisplayList } = ctx.request.body;
     try {
-      const removeAttrResult = await ObjectAttributeModel
-        .findOneAndRemove({ AttrId, ResourceID }).exec();
-      if (removeAttrResult) ctx.body = `删除${AttrId}成功!`;
+      const updateListResult = await ResourceObjectModel
+        .update({ ResourceID }, { resourceDisplayList }).exec();
+      ctx.body = updateListResult;
     } catch (error) {
       ctx.body = error;
     }

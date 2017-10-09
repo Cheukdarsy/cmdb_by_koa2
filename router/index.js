@@ -21,8 +21,14 @@ router.get('/object/init', BasicModel.initModel)
   .get('/object/attrs/:ResourceID', AttributeModel.displayObjectAttr)
   .post('/object/createAttr', AttributeModel.createObjectAttr)
   .post('/object/deleteAttr', AttributeModel.deleteObjectAttr)
+  .get('/object/allAttrList', AttributeModel.displayAllAttrList)
+  .get('/object/awailableAttrList', AttributeModel.displayAwailableAttrList)
+  .post('/object/updateDisplayList', AttributeModel.updateDisplayList)
   .get('/resource/:ResourceID', ResourceModel.getResource)
-  .post('/resource/:ResourceID/create', ResourceModel.createResource);
+  .get('/resource/attrs/:ResourceID', ResourceModel.displayResourceAttr)
+  .post('/resource/:ResourceID/create', ResourceModel.createResource)
+  .post('/resource/:ResourceID/:name/delete', ResourceModel.deleteResource)
+  .post('/resource/:ResourceID/update', ResourceModel.updateResource);
 //  .get('/object/detail/:id', Model.displayObjectDetail);
 
 

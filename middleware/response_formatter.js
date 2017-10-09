@@ -43,6 +43,7 @@ const urlFilter = pattern => async function (ctx, next) {
 
     throw error;
   }
+  console.log(ctx.header);
   if (reg.test(ctx.originalUrl)) {
     responseFormatter(ctx);
   } else {
