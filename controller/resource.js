@@ -1,9 +1,5 @@
-/*
- * @Author: darsy.cheuk
- * @Date: 2017-08-22 10:24:41
- * @Last Modified by: darsy.cheuk
- * @Last Modified time: 2017-09-21 16:02:09
- * @Content: 实例化资源的相关逻辑接口
+/**
+ * 实例化资源的相关逻辑接口
  */
 
 const mongoose = require('mongoose');

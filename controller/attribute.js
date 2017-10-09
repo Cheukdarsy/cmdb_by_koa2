@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * @Author: darsy.cheuk
  * @Date: 2017-08-22 10:33:19
@@ -7,6 +8,12 @@
  */
 
 
+=======
+/**
+ * 属性的逻辑操作 ／增删改 接口
+ */
+
+>>>>>>> bfdcb8f36318fcbf0101bc28f172a08b70c50baa
 const mongoose = require('mongoose');
 
 const ObjectAttributeModel = mongoose.model('ObjectAttr');
@@ -48,6 +55,7 @@ class Attribute {
     ctx.body = detailAttrs;
   }
 
+<<<<<<< HEAD
   static async displayAwailableAttrList(ctx) {
     const { ResourceID } = ctx.query;
     try {
@@ -77,12 +85,22 @@ class Attribute {
           tempObject.display = true;
         }
       });
+=======
+  static async displayObjectAttr(ctx) {
+    const { ResourceID } = ctx.params;
+    try {
+      const attrs = await ObjectAttributeModel.find({ ResourceID }).select('-_id -__v').exec();
+>>>>>>> bfdcb8f36318fcbf0101bc28f172a08b70c50baa
       ctx.body = attrs;
     } catch (error) {
       ctx.body = error;
     }
   }
+<<<<<<< HEAD
   // TODO: update relative resourceModel
+=======
+
+>>>>>>> bfdcb8f36318fcbf0101bc28f172a08b70c50baa
   static async deleteObjectAttr(ctx) {
     const { AttrId, ResourceID } = ctx.request.body;
     try {
@@ -93,6 +111,7 @@ class Attribute {
       ctx.body = error;
     }
   }
+<<<<<<< HEAD
 
   static async displayObjectAttr(ctx) {
     const { ResourceID } = ctx.params;
@@ -114,6 +133,8 @@ class Attribute {
       ctx.body = error;
     }
   }
+=======
+>>>>>>> bfdcb8f36318fcbf0101bc28f172a08b70c50baa
 }
 
 module.exports = Attribute;

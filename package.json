@@ -9,8 +9,11 @@
     "start": "./node_modules/nodemon/bin/nodemon.js ./bin/www.js"
   },
   "dependencies": {
+<<<<<<< HEAD
     "ioredis": "^3.1.4",
     "jsonwebtoken": "^7.4.3",
+=======
+>>>>>>> bfdcb8f36318fcbf0101bc28f172a08b70c50baa
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-compose": "^4.0.0",
